@@ -1,0 +1,9 @@
+/**/.DS_Store
+/.idea
+/ai
+/var/
+/vendor/
+/.phpunit.cache/
+.phpunit.result.cache
+.php-cs-fixer.cache
+/public/assets/

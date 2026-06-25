@@ -1,0 +1,87 @@
+{
+  "id": "babelforge.markdown-viewer",
+  "name": "Markdown Viewer",
+  "version": "1.0.0",
+  "requirements": {
+    "php": ">=8.4"
+  },
+  "description": "Renders local and remote Markdown, Mermaid, MMD, and Markdown-like documents.",
+  "type": "viewer",
+  "enabled": true,
+  "supports": [
+    "file-viewer"
+  ],
+  "runtime": {
+    "type": "web",
+    "entrypoint": "public/index.php"
+  },
+  "entrypoint": "public/index.php",
+  "routes": [
+    {
+      "scheme": "babelchrome",
+      "host": "markdown",
+      "handler": "markdown"
+    }
+  ],
+  "fileTypes": [
+    "md",
+    "markdown",
+    "mdown",
+    "mkd",
+    "mmd",
+    "mermaid"
+  ],
+  "file-type-handler": {
+    "fileTypes": [
+      "md",
+      "markdown",
+      "mmd",
+      "mermaid"
+    ]
+  },
+  "hooks": [
+    "url.resolve",
+    "file.open.resolve",
+    "address.badge.resolve",
+    "context-menu.build",
+    "settings.section.register",
+    "tab.title.resolve"
+  ],
+  "permissions": [
+    "read-local-files",
+    "serve-assets",
+    "network-fetch",
+    "native-open-file",
+    "native-reveal-file",
+    "context-menu",
+    "settings"
+  ],
+  "menuItems": [
+    {
+      "id": "markdown.open-source-file",
+      "label": "Open Source File",
+      "hook": "context-menu.build",
+      "route": "babelchrome://markdown/action/open-source-file",
+      "contexts": [
+        "markdown.local-file"
+      ]
+    },
+    {
+      "id": "markdown.reveal-in-finder",
+      "label": "Reveal in Finder",
+      "hook": "context-menu.build",
+      "route": "babelchrome://markdown/action/reveal-in-finder",
+      "contexts": [
+        "markdown.local-file"
+      ]
+    }
+  ],
+  "badge": {
+    "text": "MD",
+    "textColor": "#ffffff",
+    "backgroundColor": "#0969da"
+  },
+  "settings": {
+    "route": "babelchrome://settings#markdown-viewer"
+  }
+}

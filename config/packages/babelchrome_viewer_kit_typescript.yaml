@@ -1,0 +1,3 @@
+sensiolabs_typescript:
+    source_dir:
+        - '%kernel.project_dir%/vendor/babelforge/babel-chrome-viewer-kit/assets/babel-chrome-viewer-kit'

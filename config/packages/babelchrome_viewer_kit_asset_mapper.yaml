@@ -1,0 +1,4 @@
+framework:
+    asset_mapper:
+        paths:
+            - vendor/babelforge/babel-chrome-viewer-kit/assets/

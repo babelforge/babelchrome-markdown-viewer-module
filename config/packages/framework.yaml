@@ -1,0 +1,10 @@
+framework:
+    secret: '%env(default:default_secret:APP_SECRET)%'
+    http_method_override: false
+    handle_all_throwables: true
+    asset_mapper:
+        paths:
+            - assets/
+
+parameters:
+    default_secret: 'babel-chrome-markdown-viewer-module-dev-secret'

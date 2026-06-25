@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ view.title }}{% endblock %}
+
+{% block head %}
+    <style>{{ view.stylesheetContent|raw }}</style>
+    <script type="importmap">{{ view.importMapContent|raw }}</script>
+    <script type="application/json" id="markdown-source">{{ view.markdownJson|raw }}</script>
+    <script type="module">{{ view.scriptContent|raw }}</script>
+{% endblock %}
+
+{% block body %}
+    {% include '@BabelChromeViewerKit/header.html.twig' with {title: view.title, openWith: view.openWithView} %}
+    <div class="{{ view.shellClass }}">
+      {{ view.tableOfContentsHtml|raw }}
+      <main class="viewer-document markdown-body"
+            data-markdown-viewer
+            data-markdown-theme="{{ view.theme }}"
+            data-source-id="{{ view.sourceId }}"
+            data-auto-refresh="{{ view.autoRefreshEnabled ? '1' : '0' }}"
+            data-last-modified="{{ view.lastModified ?? '' }}">{{ view.bodyHtml|raw }}</main>
+    </div>
+{% endblock %}
