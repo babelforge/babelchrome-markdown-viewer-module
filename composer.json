@@ -58,9 +58,11 @@
         "cs-fix": "php-cs-fixer fix",
         "test": "phpunit",
         "analyse": "phpstan analyse --memory-limit=512M",
+        "assets:compile": "php bin/console asset-map:compile --env=prod --no-debug",
         "qa": [
             "@cs",
             "@analyse",
+            "@assets:compile",
             "@test"
         ]
     }
