@@ -12,10 +12,10 @@ Run quality checks with:
 composer qa
 ```
 
-Build the production zip from the modules workspace:
+Build the production zip from the meta workspace root:
 
 ```bash
-./tools/dev2prod.sh markdown-viewer
+./tools/dev2prod.sh markdown-viewer-module
 ```
 
 Navigation: [Previous: Usage](01-usage.md) | [README](README.md)
