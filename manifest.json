@@ -1,7 +1,7 @@
 {
   "id": "babelforge.markdown-viewer",
   "name": "Markdown Viewer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "requirements": {
     "php": ">=8.4"
   },
@@ -82,6 +82,6 @@
     "backgroundColor": "#0969da"
   },
   "settings": {
-    "route": "babelchrome://settings#markdown-viewer"
+    "route": "babelchrome://settings/babelforge.markdown-viewer"
   }
 }
