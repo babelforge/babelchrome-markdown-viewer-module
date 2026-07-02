@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/babelforge/babel-chrome-viewer-kit.git",
-                "reference": "5910e0b13a872d407f14a84dee8e85a1a5a2de0e"
+                "reference": "2455776473d8dcf38fdeb4dbc0a72add1f07bc4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/babelforge/babel-chrome-viewer-kit/zipball/5910e0b13a872d407f14a84dee8e85a1a5a2de0e",
-                "reference": "5910e0b13a872d407f14a84dee8e85a1a5a2de0e",
+                "url": "https://api.github.com/repos/babelforge/babel-chrome-viewer-kit/zipball/2455776473d8dcf38fdeb4dbc0a72add1f07bc4d",
+                "reference": "2455776473d8dcf38fdeb4dbc0a72add1f07bc4d",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                 "source": "https://github.com/babelforge/babel-chrome-viewer-kit/tree/main",
                 "issues": "https://github.com/babelforge/babel-chrome-viewer-kit/issues"
             },
-            "time": "2026-07-02T11:00:34+00:00"
+            "time": "2026-07-02T11:40:53+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
