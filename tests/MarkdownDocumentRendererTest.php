@@ -78,6 +78,46 @@ final class MarkdownDocumentRendererTest extends TestCase
     }
 
     /**
+     * Verifies that same-document anchor links use the canonical BabelChrome viewer URL.
+     */
+    public function testRenderUsesGenericViewerUrlForSameDocumentAnchorLinks(): void
+    {
+        $renderer = new MarkdownDocumentRenderer($this->assetResolver(), new SourceRegistry());
+        $sourcePath = '/tmp/README.md';
+        $view = $renderer->render(
+            new ViewerSource('README.md', "[Install](#install-modules)\n\n## Install Modules", 'file:///tmp/', true, 'file', $sourcePath, 'text/markdown', null),
+            Request::create('/markdown'),
+        );
+
+        self::assertStringContainsString(
+            'href="babelchrome://viewer/file/'.rawurlencode($sourcePath).'#install-modules"',
+            $view->bodyHtml,
+        );
+    }
+
+    /**
+     * Verifies that the generated table of contents uses the canonical BabelChrome viewer URL.
+     */
+    public function testRenderUsesGenericViewerUrlForTableOfContentsLinks(): void
+    {
+        $renderer = new MarkdownDocumentRenderer($this->assetResolver(), new SourceRegistry());
+        $sourcePath = '/tmp/README.md';
+        $view = $renderer->render(
+            new ViewerSource('README.md', "# Title\n\n## Install Modules\n\n## Configure", 'file:///tmp/', true, 'file', $sourcePath, 'text/markdown', null),
+            Request::create('/markdown'),
+        );
+
+        self::assertStringContainsString(
+            'href="babelchrome://viewer/file/'.rawurlencode($sourcePath).'#install-modules"',
+            $view->tableOfContentsHtml,
+        );
+        self::assertStringNotContainsString(
+            'href="#install-modules"',
+            $view->tableOfContentsHtml,
+        );
+    }
+
+    /**
      * Creates the module asset resolver used by tests.
      *
      * @return ModuleAssetResolver the module asset resolver

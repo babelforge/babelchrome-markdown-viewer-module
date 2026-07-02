@@ -192,7 +192,10 @@ final readonly class MarkdownDocumentRenderer
             $rewritten .= $document->saveHTML($childNode);
         }
 
-        return [$rewritten, $this->renderTableOfContents($headings)];
+        return [
+            $rewritten,
+            $this->renderTableOfContents($headings, $this->babelChromeDocumentUri($source->value, $source)),
+        ];
     }
 
     /**
@@ -278,11 +281,12 @@ final readonly class MarkdownDocumentRenderer
     /**
      * Renders the table of contents.
      *
-     * @param list<array{level: int, id: string, title: string}> $headings the headings
+     * @param list<array{level: int, id: string, title: string}> $headings           the headings
+     * @param string                                             $currentDocumentUri the canonical BabelChrome URI for the current document
      *
      * @return string the table of contents HTML
      */
-    private function renderTableOfContents(array $headings): string
+    private function renderTableOfContents(array $headings, string $currentDocumentUri): string
     {
         if (count($headings) < 2) {
             return '';
@@ -291,9 +295,9 @@ final readonly class MarkdownDocumentRenderer
         $items = '';
         foreach ($headings as $heading) {
             $level = max(1, min(3, $heading['level']));
-            $id = htmlspecialchars($heading['id'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
             $title = htmlspecialchars($heading['title'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-            $items .= '<li class="viewer-toc-level-'.$level.'"><a href="#'.$id.'">'.$title.'</a></li>';
+            $href = htmlspecialchars($currentDocumentUri.'#'.$heading['id'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            $items .= '<li class="viewer-toc-level-'.$level.'"><a href="'.$href.'">'.$title.'</a></li>';
         }
 
         return '<nav class="viewer-toc" aria-label="Table of contents"><div class="viewer-toc-title">Contents</div><ol>'.$items.'</ol></nav>';
@@ -311,7 +315,15 @@ final readonly class MarkdownDocumentRenderer
      */
     private function resolvedUri(string $uri, ViewerSource $source, Request $request, string $tagName): string
     {
-        if ('' === trim($uri) || str_starts_with($uri, '#') || str_starts_with($uri, '//')) {
+        if ('' === trim($uri)) {
+            return $uri;
+        }
+
+        if ('a' === $tagName && str_starts_with($uri, '#')) {
+            return $this->babelChromeDocumentUri($source->value, $source).$uri;
+        }
+
+        if (str_starts_with($uri, '#') || str_starts_with($uri, '//')) {
             return $uri;
         }
 
