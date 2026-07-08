@@ -1,7 +1,7 @@
 {
   "id": "babelforge.markdown-viewer",
   "name": "Markdown Viewer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "requirements": {
     "php": ">=8.4"
   },
@@ -12,7 +12,7 @@
     "file-viewer"
   ],
   "runtime": {
-    "type": "web",
+    "type": "php-web",
     "entrypoint": "public/index.php"
   },
   "entrypoint": "public/index.php",
