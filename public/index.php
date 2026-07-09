@@ -22,6 +22,12 @@ if ('/health' === $request->getPathInfo()) {
 }
 
 $sourceId = $_SERVER['BABELCHROME_SOURCE_ID'] ?? '';
+if (!is_string($sourceId) || '' === $sourceId) {
+    $sourceId = $request->headers->get('X-BabelChrome-Source-Id', '');
+}
+if (!is_string($sourceId) || '' === $sourceId) {
+    $sourceId = $request->query->get('sourceId', '');
+}
 if (is_string($sourceId) && '' !== $sourceId) {
     $request->attributes->set('sourceId', $sourceId);
 }
