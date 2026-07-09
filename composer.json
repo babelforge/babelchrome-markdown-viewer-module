@@ -10,8 +10,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "BabelForge\\BabelChromeMarkdownViewerModule\\Tests\\": "tests/",
-            "BabelForge\\BabelChrome\\LocalViewer\\": "tests/LocalViewer/"
+            "BabelForge\\BabelChromeMarkdownViewerModule\\Tests\\": "tests/"
         }
     },
     "require": {

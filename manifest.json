@@ -1,7 +1,7 @@
 {
   "id": "babelforge.markdown-viewer",
   "name": "Markdown Viewer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "requirements": {
     "php": ">=8.4"
   },
@@ -12,10 +12,28 @@
     "file-viewer"
   ],
   "runtime": {
-    "type": "php-web",
-    "entrypoint": "public/index.php"
+    "type": "process-web",
+    "command": "php",
+    "args": [
+      "-S",
+      "127.0.0.1:{{ port }}",
+      "-t",
+      "public",
+      "public/index.php"
+    ],
+    "cwd": ".",
+    "readyUrl": "http://127.0.0.1:{{ port }}/health",
+    "timeoutMs": 10000,
+    "stop": {
+      "signal": "TERM",
+      "timeoutMs": 3000
+    }
   },
-  "entrypoint": "public/index.php",
+  "readiness": {
+    "type": "command",
+    "command": "php bin/readiness.php",
+    "timeoutMs": 3000
+  },
   "routes": [
     {
       "scheme": "babelchrome",
