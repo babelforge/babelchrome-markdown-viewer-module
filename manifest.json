@@ -1,9 +1,30 @@
 {
   "id": "babelforge.markdown-viewer",
   "name": "Markdown Viewer",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "requirements": {
     "php": ">=8.4"
+  },
+  "requiredSettings": {
+    "phpPath": {
+      "type": "executable",
+      "label": "PHP executable",
+      "binary": "php",
+      "minVersion": "8.4",
+      "autoDetectPaths": [
+        "/opt/homebrew/opt/php@8.4/bin/php",
+        "/opt/homebrew/opt/php/bin/php",
+        "/opt/homebrew/bin/php",
+        "/usr/local/opt/php@8.4/bin/php",
+        "/usr/local/opt/php/bin/php",
+        "/usr/local/bin/php",
+        "/opt/local/bin/php",
+        "/usr/bin/php"
+      ],
+      "versionArgs": [
+        "-v"
+      ]
+    }
   },
   "description": "Renders local and remote Markdown, Mermaid, MMD, and Markdown-like documents.",
   "type": "viewer",
@@ -14,7 +35,7 @@
   "runtime": {
     "type": "process-web",
     "startPolicy": "prewarm",
-    "command": "php",
+    "command": "{{ settings.phpPath }}",
     "args": [
       "-S",
       "127.0.0.1:{{ port }}",
@@ -29,11 +50,6 @@
       "signal": "TERM",
       "timeoutMs": 3000
     }
-  },
-  "readiness": {
-    "type": "command",
-    "command": "php bin/readiness.php",
-    "timeoutMs": 3000
   },
   "routes": [
     {
