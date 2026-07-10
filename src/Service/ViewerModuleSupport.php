@@ -66,7 +66,7 @@ abstract class ViewerModuleSupport
     }
 
     /**
-     * Returns the LocalServiceHost template directory.
+     * Returns this module's template directory.
      *
      * @return string the template directory
      */
